@@ -223,7 +223,8 @@ public class NewTest extends ReusableMethods {
 	public static void createdFirstReportPortion() throws IOException{
 		 
 					System.out.println("Image FIRST TEST");
-		 FileUtils.cleanDirectory(new File("/var/lib/jenkins/jobs/NE_Selenium_Single_URL/workspace/src/"));
+					try{
+		// FileUtils.cleanDirectory(new File("/var/lib/jenkins/jobs/NE_Selenium_Single_URL/workspace/src/Screenshots"));
 		  FC.createNewFile();//Create file.
 		  
 		  //Writing In to file.
@@ -234,6 +235,11 @@ public class NewTest extends ReusableMethods {
 		  BW.newLine();//To write next string on new line.
 		  BW.write("<body>"); //Writing In To File.
 		  BW.write("<ul>"); //Writing In To File.
+					}catch(Exception ex)
+					{
+						System.out.println("Image second TEST");
+						System.out.println(ex.getStackTrace());
+					}
 
 	}
 	
