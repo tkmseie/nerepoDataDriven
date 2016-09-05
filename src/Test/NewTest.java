@@ -226,7 +226,8 @@ public class NewTest extends ReusableMethods {
 					try{
 		// FileUtils.cleanDirectory(new File("/var/lib/jenkins/jobs/NE_Selenium_Single_URL/workspace/src/Screenshots"));
 		  FC.createNewFile();//Create file.
-		  
+		  						System.out.println("Image third TEST");
+
 		  //Writing In to file.
 		  //Create Object of java FileWriter and BufferedWriter class.
 		  FileWriter FW = new FileWriter(TestFile);
@@ -238,7 +239,7 @@ public class NewTest extends ReusableMethods {
 					}catch(Exception ex)
 					{
 						System.out.println("Image second TEST");
-						System.out.println(ex.getStackTrace());
+						System.out.println(	ex.getMessage());
 					}
 
 	}
