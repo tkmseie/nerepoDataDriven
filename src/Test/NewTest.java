@@ -41,7 +41,9 @@ public class NewTest extends ReusableMethods {
 		public static void firstTest() throws InterruptedException, IOException {
 
 		 //Creating html file for logging results
-		createdFirstReportPortion();
+		//createdFirstReportPortion();
+					System.out.println("TEST");
+
 		
 		//Opens firefox driver
 		driver= new FirefoxDriver();
