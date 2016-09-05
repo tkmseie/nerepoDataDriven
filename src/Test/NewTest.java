@@ -44,9 +44,13 @@ public class NewTest extends ReusableMethods {
 		//createdFirstReportPortion();
 					System.out.println("TEST");
 
-		
+		try{
 		//Opens firefox driver
 		driver= new FirefoxDriver();
+		}catch(Exception ex)
+		{
+			System.out.println(ex.getMessage());
+		}
 		
 		//Navigating to the application URL
 				driver.get(System.getenv("APPURL"));
