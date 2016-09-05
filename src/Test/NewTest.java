@@ -222,7 +222,8 @@ public class NewTest extends ReusableMethods {
 	@BeforeTest
 	public static void createdFirstReportPortion() throws IOException{
 		 
-		 FileUtils.cleanDirectory(new File("/Users/Shared/Jenkins/Home/workspace/JavaJob/src/Screenshots/"));
+					System.out.println("Image FIRST TEST");
+		 FileUtils.cleanDirectory(new File("/var/lib/jenkins/jobs/NE_Selenium_Single_URL/workspace/src/"));
 		  FC.createNewFile();//Create file.
 		  
 		  //Writing In to file.
