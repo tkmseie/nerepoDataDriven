@@ -7,7 +7,7 @@
 <!-- ========== Initialize Properties =================================== -->
     <property environment="env"/>    
     <property name="ws.home" value="${basedir}"/>
-	<property name="ws.jars" value="/Users/Shared/Jenkins/Home/JARS"/>
+	<property name="ws.jars" value="/var/lib/jenkins/jobs/NE_Selenium_Single_URL/workspace/JARS"/>
     <property name="test.dest" value="${ws.home}/build"/>
     <property name="test.src" value="${ws.home}/src"/>
 	<property name="ng.result" value="test-output"/>

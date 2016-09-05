@@ -20,7 +20,7 @@ public class ReusableMethods {
 	
 	
 	public static WebDriver driver;
-	public static String TestFile = "/Users/Shared/Jenkins/Home/workspace/JavaJob/src/Report.html";
+	public static String TestFile = "/var/lib/jenkins/jobs/NE_Selenium_Single_URL/workspace/JavaJob/src/Report.html";
 	public static File FC = new File(TestFile);//Created object of java File class.
 	public static BufferedWriter BW;
 
