@@ -3,15 +3,21 @@ package Test;
 import org.testng.Reporter;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.List;
+
+import jxl.Sheet;
+import jxl.Workbook;
+import jxl.read.biff.BiffException;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.jetty.html.Break;
@@ -23,40 +29,42 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.Test;
 
+import Util.TestUtil;
+import Util.Xls_Reader;
+
 
 
 public class NewTest extends ReusableMethods {
+    public static Xls_Reader AAaisxls=null;
 	public static Integer counter =0;
 	public static Integer totalNoOfGrids=0;
 	public static List<WebElement> allGrids;
 	public static String titleBeforeClick;
 	public static boolean stopTest = false;
+	public static Integer clickCount =0;
 	
 	
 	/**
 	 * This is the main test to be executed. 
 	 * This test opens the application in firefox browser and verifies the application is loaded or not
 	 * if the application is loaded,it continues with iterating through clicking all the combinations of links
+	 * @throws BiffException 
 	 */	@Test
-		public static void firstTest() throws InterruptedException, IOException {
+		public static void firstTest() throws InterruptedException, IOException, BiffException {
+		 
+		 
 
 		 //Creating html file for logging results
 		//createdFirstReportPortion();
-					System.out.println("TEST");
 
-		try{
+					
 		//Opens firefox driver
 		driver= new FirefoxDriver();
-		}catch(Exception ex)
-		{
-			System.out.println(ex.getMessage());
-		}
 		
 		//Navigating to the application URL
-				driver.get(System.getenv("APPURL"));
-		//driver.get("http://nationalequityatlas.org/indicators/Wages%3A_Median/By_ancestry%3A40211/United_States/false/Race_ethnicity%3ABlack/Nativity%3AAll_people/Year%3A2012");
+		driver.get(System.getenv("APPURL"));
 		
-
+		
 		//Verifying the logo is loaded or not. If the logo is notloaded the test will not be executed.
 		WebElement logoImageObj = findObject(driver, "xpath", "//*[@id=\"page\"]/header/div/hgroup/h2/ul/li[1]/a/img", "Policy Link Logo");
         if(logoImageObj!=null)
@@ -66,6 +74,7 @@ public class NewTest extends ReusableMethods {
         else{
         	logErrorMessage("Error while loading application. Cannot continue the test");
         }	
+		
 	}
 	 
 	 /**
@@ -78,7 +87,14 @@ public class NewTest extends ReusableMethods {
 		try{
 		//Gets all the links in the Breakdown column
 		allSumInsuredFields = driver.findElements(By.className("dynamic-dsp-link"));
-		
+		System.out.println(allSumInsuredFields.size());
+		//If no filters are available verifies the loaded image.
+		if (allSumInsuredFields.size()==0)
+		{
+			titleBeforeClick = "";
+			verifyImage();
+			clickCombination( );
+		}
 		//This loop iterates through each link in the breakdown panel and clicks it
 		for(WebElement element : allSumInsuredFields)     
 		{
@@ -87,8 +103,10 @@ public class NewTest extends ReusableMethods {
 			          //If it is not first link
 		              if (counter >0)
 		                {
-		                    element.click();
+		                   // element.click();
+		            	    clickObject(element);
 				      		Thread.sleep(8000);
+				      		clickCount++;
 
 		                }
 		              //If its first link, while page load itslef it would have been clicked. So the link will not be clicked
@@ -102,6 +120,7 @@ public class NewTest extends ReusableMethods {
 		}
 		}
 		catch(Exception ex){
+			logErrorMessage(ex.getLocalizedMessage());
 		  logErrorMessage("Error while identifying links in Breakdown column. Test stopped.");	
 		}
 		
@@ -158,12 +177,13 @@ public class NewTest extends ReusableMethods {
 		if(tempFilterPanel != null)
 		{
 			currentGrid = tempFilterPanel.findElements(By.cssSelector(".atlas-grey-wrapper-small.atlas-display-filter")).get(currIndex);
-		
 		//If the identified filter panel is last filter panel, it clicks all the links in that panel and verifies the image loading status
 		if (totalNoOfGrids == currIndex+1)
 		{
 			List<WebElement> allLastlinks = currentGrid.findElements(By.className("atlas-display-exposed-filter"));
 			       Integer totalLinkCount = allLastlinks.size();
+				    logMessage("1");
+
 					for(i=0; i<totalLinkCount; i++)  
 					{
 						currentGrid = driver.findElement(By.className("dsp-filter-wrap")).findElements(By.cssSelector(".atlas-grey-wrapper-small.atlas-display-filter")).get(currIndex);
@@ -173,8 +193,10 @@ public class NewTest extends ReusableMethods {
 						{
 							WebElement titleObject = findObject(driver, "classname", "display-title", "Filter Panel");
 							titleBeforeClick = titleObject.getText();
-							getLinkObj.click();
-							Thread.sleep(5000);
+							//getLinkObj.click();
+							clickObject(getLinkObj);
+							clickCount++;
+							Thread.sleep(4000);
 							verifyImage();	
 						}
 						else
@@ -187,19 +209,33 @@ public class NewTest extends ReusableMethods {
 		//If it is not last filter panel, then it clicks each and every link & again navigates to next panel by calling this function recursively
 		else
 		{
+		    logMessage(currIndex.toString());
 			currentGrid = driver.findElement(By.className("dsp-filter-wrap")).findElements(By.cssSelector(".atlas-grey-wrapper-small.atlas-display-filter")).get(currIndex);
-			List<WebElement> allLinks = currentGrid.findElements(By.className("atlas-display-exposed-filter"));
+			//List<WebElement> allLinks = currentGrid.findElements(By.className("atlas-display-exposed-filter"));
+            logMessage(currentGrid.getText());
+			//List<WebElement> allLinks = currentGrid.findElements(By.xpath("//a[contains(@class, '-filter')]"));
+            List<WebElement> allLinks = currentGrid.findElements(By.tagName("a"));
+
+			for(j=0; j<allLinks.size(); j++)  
+			{
+				logMessage(allLinks.get(j).getText());
+			}
+
 			Integer totalLinkCount = allLinks.size();
+		    logMessage(totalLinkCount.toString());
+
 			for(j=0; j<totalLinkCount; j++)  
 			{
 				currentGrid = driver.findElement(By.className("dsp-filter-wrap")).findElements(By.cssSelector(".atlas-grey-wrapper-small.atlas-display-filter")).get(currIndex);
-				allLinks = currentGrid.findElements(By.className("atlas-display-exposed-filter"));
+				allLinks = currentGrid.findElements(By.tagName("a"));
 				
-				WebElement getLinkObj = findObjectFromClassNameListByIndex(currentGrid, j, "atlas-display-exposed-filter", "Link in Filter Panel");
+				WebElement getLinkObj = findObjectFromTagListByIndex(currentGrid, j, "a", "Link in Filter Panel");
 				if (getLinkObj != null)
 				{
 					
-					getLinkObj.click();
+					//getLinkObj.click();
+					clickObject(getLinkObj);
+					clickCount++;
 					Thread.sleep(8000);
 					findCombination(currIndex+1);				
 				}
@@ -226,11 +262,11 @@ public class NewTest extends ReusableMethods {
 	@BeforeTest
 	public static void createdFirstReportPortion() throws IOException{
 		 
-					System.out.println("Image FIRST TEST");
-					try{
-		// FileUtils.cleanDirectory(new File("/var/lib/jenkins/jobs/NE_Selenium_Single_URL/workspace/src/Screenshots"));
-		  FC.createNewFile();//Create file.
-
+		   
+		FileUtils.cleanDirectory(new File("/var/lib/jenkins/jobs/NE_Selenium_Single_URL/workspace/src/Screenshots/"));
+  
+		FC.createNewFile();//Create file.
+		  
 		  //Writing In to file.
 		  //Create Object of java FileWriter and BufferedWriter class.
 		  FileWriter FW = new FileWriter(TestFile);
@@ -239,11 +275,6 @@ public class NewTest extends ReusableMethods {
 		  BW.newLine();//To write next string on new line.
 		  BW.write("<body>"); //Writing In To File.
 		  BW.write("<ul>"); //Writing In To File.
-					}catch(Exception ex)
-					{
-						System.out.println("Image second TEST");
-						System.out.println(	ex.getMessage());
-					}
 
 	}
 	
@@ -280,7 +311,14 @@ public class NewTest extends ReusableMethods {
 			List<WebElement> divElements = imageObject.findElements(By.tagName("div"));
             if (divElements.size() !=0)
               {
-            	 break;
+    			try{
+            	WebElement nodataObject = imageObject.findElement(By.className("no-data"));
+            	   logErrorMessage("No data message shown for "+titleObject.getText()+ " Link.");
+  			       BW.write(" <li><font color='orange'>No data message shown for "+titleObject.getText()+ " Link<font></li>");    			}catch(Exception ex){
+    				
+    			}
+            	break;
+
               }
             else
               {
@@ -317,7 +355,7 @@ public class NewTest extends ReusableMethods {
         }else{
         	logErrorMessage("Failed: Unable to communicate to the server. Plesae check network connectivity");
 			BW.write(" <li><font color='red'>Failed: Unable to communicate to the server. Plesae check network connectivity<font></li>"); //Writing In To File.
-            Thread.currentThread().stop();
+         //   Thread.currentThread().stop();
         }
 		
 	}
@@ -329,7 +367,7 @@ public class NewTest extends ReusableMethods {
 	public static boolean compareStrings(String a, String b)
 	{
        //If both the strings are identical returns true
-		if(a.equals(b))
+		if(a.equals(b) & clickCount >1)
 		{
 			return true;
 		}
@@ -346,6 +384,18 @@ public class NewTest extends ReusableMethods {
 	 public static void screenShot(String fileNameValue) throws IOException{
 		    fileNameValue = fileNameValue.replace("/", "_");
 	        File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-		    FileUtils.copyFile(scrFile, new File("/Users/Shared/Jenkins/Home/workspace/JavaJob/src/Screenshots/"+fileNameValue+".jpg"));		 
+		    FileUtils.copyFile(scrFile, new File("/var/lib/jenkins/jobs/NE_Selenium_Single_URL/workspace/src/Screenshots/"+fileNameValue+".jpg"));		 
 	 }
+	 
+	 public static void clickObject (WebElement objectToClick) throws IOException{
+		 try{
+			 logMessage(objectToClick.getText() +" is clickked.");
+			 objectToClick.click();
+		 }
+		 catch(Exception ex){
+			 logErrorMessage("Error while clicking the Link");
+		 }
+	 }
+	 
+	 
 }
