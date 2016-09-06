@@ -91,6 +91,34 @@ public class ReusableMethods {
 		
 	
 	}
+
+	/**
+	 * This method identifies list of elements using class name and then returns a particular element based on index value
+	 * <p>
+	 * This method always returns the WebElement (i.e Object) if it is available.
+	 * If the object is not available it returns null.
+	 * @param  parObject  Parent object inwhich the list of elements to be identified
+	 * @param  indexVal    Index value of which object to be returned
+	 * @param  classNameValue  Classname value to be used for object identificatoin
+	 * @param  objName (String) This is name of object & it will be used to log messages               
+	 * @return          If the object is identified it return the object as WebElement
+	 *                  else it will return null
+	 * 
+	 */
+	public static WebElement findObjectFromTagListByIndex(WebElement parObject, Integer indexVal, String tagValue, String ObjectName ) throws IOException{
+		
+		try{
+			List<WebElement> tempAllLinks = parObject.findElements(By.tagName(tagValue));
+			WebElement webObj = tempAllLinks.get(indexVal);
+			logMessage("The Object " + ObjectName + " is available.");
+			return webObj;
+			}catch (Exception ex)
+			{
+				logErrorMessage("The Object " + ObjectName + " is not available.");
+				return null;
+			}
+		
+	}
 	
 	/**
 	 * This method identifies list of elements using class name and then returns a particular element based on index value
