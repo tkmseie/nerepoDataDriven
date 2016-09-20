@@ -63,9 +63,10 @@ public class NewTest extends ReusableMethods {
 		//String FilePath = "/Users/senthil-mac/Desktop/Selinum Code/Work Space/Poc_NE_DataDriven/src/URLList.xls";
 		try{
         String FilePath = obj.getProperty("ExcelPath");
+		            logMessage(FilePath);
+
 		FileInputStream fs = new FileInputStream(FilePath);
 		Workbook wb = Workbook.getWorkbook(fs);
-            logMessage("1");
 
 		// TO get the access to the sheet
 		Sheet sh = wb.getSheet(obj.getProperty("SheetName"));
