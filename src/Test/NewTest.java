@@ -58,7 +58,7 @@ public class NewTest extends ReusableMethods {
 		 
 		 objfile = new FileInputStream(System.getProperty("user.dir")+"/src/cofig.properties");
 		  obj.load(objfile); 
-     
+     logMessage("Navigating to: ");
 		 //Creating html file for logging results
 		//createdFirstReportPortion();
 		//String FilePath = "/Users/senthil-mac/Desktop/Selinum Code/Work Space/Poc_NE_DataDriven/src/URLList.xls";
@@ -78,7 +78,8 @@ public class NewTest extends ReusableMethods {
 		for (int row = 1; row < totalNoOfRows; row++) {
 
 		String URLValue= sh.getCell(0, row).getContents();
-					
+		     logMessage("Navigating to: ");
+			
 		//Opens firefox driver
 		driver= new FirefoxDriver();
 		
