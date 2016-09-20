@@ -63,7 +63,6 @@ public class NewTest extends ReusableMethods {
 		//String FilePath = "/Users/senthil-mac/Desktop/Selinum Code/Work Space/Poc_NE_DataDriven/src/URLList.xls";
 		try{
         String FilePath = obj.getProperty("ExcelFilePath");
-		            logMessage("FilePath is"+ FilePath);
 
 		FileInputStream fs = new FileInputStream(FilePath);
 		Workbook wb = Workbook.getWorkbook(fs);
@@ -82,7 +81,6 @@ public class NewTest extends ReusableMethods {
 		for (int row = 1; row < totalNoOfRows; row++) {
 
 		String URLValue= sh.getCell(0, row).getContents();
-		            logMessage("2");
 	
 		//Opens firefox driver
 		
@@ -248,13 +246,8 @@ public class NewTest extends ReusableMethods {
 			//List<WebElement> allLinks = currentGrid.findElements(By.xpath("//a[contains(@class, '-filter')]"));
             List<WebElement> allLinks = currentGrid.findElements(By.tagName("a"));
 
-			for(j=0; j<allLinks.size(); j++)  
-			{
-				logMessage(allLinks.get(j).getText());
-			}
-
+			
 			Integer totalLinkCount = allLinks.size();
-		    logMessage(totalLinkCount.toString());
 
 			for(j=0; j<totalLinkCount; j++)  
 			{
