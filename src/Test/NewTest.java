@@ -62,7 +62,7 @@ public class NewTest extends ReusableMethods {
 		 //Creating html file for logging results
 		//createdFirstReportPortion();
 		//String FilePath = "/Users/senthil-mac/Desktop/Selinum Code/Work Space/Poc_NE_DataDriven/src/URLList.xls";
-		
+		try{
         String FilePath = obj.getProperty("ExcelPath");
 		FileInputStream fs = new FileInputStream(FilePath);
 		Workbook wb = Workbook.getWorkbook(fs);
@@ -79,7 +79,6 @@ public class NewTest extends ReusableMethods {
 		for (int row = 1; row < totalNoOfRows; row++) {
 
 		String URLValue= sh.getCell(0, row).getContents();
-		     logMessage("Navigating to: ");
 			
 		//Opens firefox driver
 		driver= new FirefoxDriver();
@@ -98,6 +97,10 @@ public class NewTest extends ReusableMethods {
         else{
         	logErrorMessage("Error while loading application. Cannot continue the test");
         }	
+		}
+		}catch(Exception ex)
+		{
+						logErrorMessage(ex.getLocalizedMessage());
 		}
 	}
 	 
