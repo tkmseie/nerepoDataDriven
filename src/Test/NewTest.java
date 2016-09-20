@@ -285,6 +285,10 @@ public class NewTest extends ReusableMethods {
 	public static void createdFirstReportPortion() throws IOException{
 		 
 		   
+		System.out.println("test");
+		objfile = new FileInputStream(System.getProperty("user.dir")+"/src/cofig.properties");
+		  obj.load(objfile); 
+  		 			System.out.println("Screenshot Path: "+obj.getProperty("ScreenshotPath"));
 		FileUtils.cleanDirectory(new File(obj.getProperty("ScreenshotPath")));
   
 		FC.createNewFile();//Create file.
