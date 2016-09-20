@@ -79,6 +79,7 @@ public class NewTest extends ReusableMethods {
 		for (int row = 1; row < totalNoOfRows; row++) {
 
 		String URLValue= sh.getCell(0, row).getContents();
+		}
 		}catch(Exception ex)
 {
 	logMessage(e.getMessage());
