@@ -2,11 +2,13 @@ package Test;
 
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Properties;
 import java.util.TimeZone;
 
 import org.apache.commons.io.FileUtils;
@@ -20,10 +22,9 @@ public class ReusableMethods {
 	
 	
 	public static WebDriver driver;
-	public static String TestFile = "/var/lib/jenkins/jobs/NE_Selenium_Single_URL/workspace/src/Report.html";
+	public static String TestFile = "/Users/senthil-mac/SeleniumScreenshot/Report.html";
 	public static File FC = new File(TestFile);//Created object of java File class.
 	public static BufferedWriter BW;
-
 	
 	/**
 	 * This method identifies appropriate method for object identification. 
@@ -91,7 +92,7 @@ public class ReusableMethods {
 		
 	
 	}
-
+	
 	/**
 	 * This method identifies list of elements using class name and then returns a particular element based on index value
 	 * <p>
@@ -105,10 +106,10 @@ public class ReusableMethods {
 	 *                  else it will return null
 	 * 
 	 */
-	public static WebElement findObjectFromTagListByIndex(WebElement parObject, Integer indexVal, String tagValue, String ObjectName ) throws IOException{
+	public static WebElement findObjectFromClassNameListByIndex(WebElement parObject, Integer indexVal, String classNameValue, String ObjectName ) throws IOException{
 		
 		try{
-			List<WebElement> tempAllLinks = parObject.findElements(By.tagName(tagValue));
+			List<WebElement> tempAllLinks = parObject.findElements(By.className(classNameValue));
 			WebElement webObj = tempAllLinks.get(indexVal);
 			logMessage("The Object " + ObjectName + " is available.");
 			return webObj;
@@ -133,10 +134,10 @@ public class ReusableMethods {
 	 *                  else it will return null
 	 * 
 	 */
-	public static WebElement findObjectFromClassNameListByIndex(WebElement parObject, Integer indexVal, String classNameValue, String ObjectName ) throws IOException{
+	public static WebElement findObjectFromTagListByIndex(WebElement parObject, Integer indexVal, String tagValue, String ObjectName ) throws IOException{
 		
 		try{
-			List<WebElement> tempAllLinks = parObject.findElements(By.className(classNameValue));
+			List<WebElement> tempAllLinks = parObject.findElements(By.tagName(tagValue));
 			WebElement webObj = tempAllLinks.get(indexVal);
 			logMessage("The Object " + ObjectName + " is available.");
 			return webObj;

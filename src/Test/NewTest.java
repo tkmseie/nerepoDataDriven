@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.List;
+import java.util.Properties;
 
 import jxl.Sheet;
 import jxl.Workbook;
@@ -42,7 +43,9 @@ public class NewTest extends ReusableMethods {
 	public static String titleBeforeClick;
 	public static boolean stopTest = false;
 	public static Integer clickCount =0;
-	
+	public static Properties obj = new Properties(); 
+	public static FileInputStream objfile;
+
 	
 	/**
 	 * This is the main test to be executed. 
@@ -53,17 +56,36 @@ public class NewTest extends ReusableMethods {
 		public static void firstTest() throws InterruptedException, IOException, BiffException {
 		 
 		 
-
+		 objfile = new FileInputStream(System.getProperty("user.dir")+"/src/cofig.properties");
+		  obj.load(objfile); 
+     
 		 //Creating html file for logging results
 		//createdFirstReportPortion();
+		//String FilePath = "/Users/senthil-mac/Desktop/Selinum Code/Work Space/Poc_NE_DataDriven/src/URLList.xls";
+        String FilePath = obj.getProperty("ExcelPath");
+		FileInputStream fs = new FileInputStream(FilePath);
+		Workbook wb = Workbook.getWorkbook(fs);
 
+		// TO get the access to the sheet
+		Sheet sh = wb.getSheet(obj.getProperty("SheetName"));
+
+		// To get the number of rows present in sheet
+		int totalNoOfRows = sh.getRows();
+
+		// To get the number of columns present in sheet
+		int totalNoOfCols = sh.getColumns();
+
+		for (int row = 1; row < totalNoOfRows; row++) {
+
+		String URLValue= sh.getCell(0, row).getContents();
 					
 		//Opens firefox driver
 		driver= new FirefoxDriver();
 		
 		//Navigating to the application URL
-		driver.get(System.getenv("APPURL"));
-		
+		//driver.get(System.getenv("APPURL"));
+		logMessage("Navigating to: "+ URLValue);
+		driver.get(URLValue);
 		
 		//Verifying the logo is loaded or not. If the logo is notloaded the test will not be executed.
 		WebElement logoImageObj = findObject(driver, "xpath", "//*[@id=\"page\"]/header/div/hgroup/h2/ul/li[1]/a/img", "Policy Link Logo");
@@ -74,7 +96,7 @@ public class NewTest extends ReusableMethods {
         else{
         	logErrorMessage("Error while loading application. Cannot continue the test");
         }	
-		
+		}
 	}
 	 
 	 /**
@@ -263,7 +285,8 @@ public class NewTest extends ReusableMethods {
 	public static void createdFirstReportPortion() throws IOException{
 		 
 		   
-		FileUtils.cleanDirectory(new File("/var/lib/jenkins/jobs/NE_Selenium_Single_URL/workspace/src/Screenshots/"));
+		FileUtils.cleanDirectory(new File(obj.getProperty("ScreenshotPath")));
+  
 		FC.createNewFile();//Create file.
 		  
 		  //Writing In to file.
@@ -327,33 +350,33 @@ public class NewTest extends ReusableMethods {
 		}
 		//Takes screenshot for all filter combinations
 		screenShot(titleObject.getText());
-		if(timerCount<5)
+		if(timerCount < Integer.parseInt(obj.getProperty("BestMaximumLoadTim")) )
 		{
 			System.out.println("Image is Loaded for "+titleObject.getText()+ " Link.");
-			  BW.write(" <li><font color='blue'>"+titleObject.getText()+ "Link<font></li>"); //Writing In To File.
+			  BW.write(" <li><font color='"+ obj.getProperty("BestLoadTimeColor")+"'>"+titleObject.getText()+ "Link<font></li>"); //Writing In To File.
 
 		}
-		else if(timerCount>=5 && timerCount<8)
+		else if(timerCount>=Integer.parseInt(obj.getProperty("BetterMiniumLoadTime")) && timerCount<Integer.parseInt(obj.getProperty("BetterMaximumLoadTime")))
 		{
 			System.out.println("Image is Loaded for "+titleObject.getText()+ " Link.");
-			  BW.write(" <li><font color='green'>"+titleObject.getText()+ " Link<font></li>"); //Writing In To File.
+			  BW.write(" <li><font color='"+obj.getProperty("BetterLoadTimeColor") +"'>"+titleObject.getText()+ " Link<font></li>"); //Writing In To File.
 
 		}
-		else if(timerCount>=8 && timerCount<15)
+		else if(timerCount>=Integer.parseInt(obj.getProperty("GoodMiniumLoadTime")) && timerCount<Integer.parseInt(obj.getProperty("GoodMaximumLoadTime")))
 		{
 			System.out.println("Image is Loaded for "+titleObject.getText()+ " Link.");
-			  BW.write(" <li><font color='yello'>"+titleObject.getText()+ " Link<font></li>"); //Writing In To File.
+			  BW.write(" <li><font color='"+ obj.getProperty("GoodLoadTimeColor")+"'>"+titleObject.getText()+ " Link<font></li>"); //Writing In To File.
 
 		}
 		else
 		{
 			logErrorMessage("Failed: Image is Loaded Not  for "+titleObject.getText()+ " Link.");
-			  BW.write(" <li><font color='red'>Failed: "+titleObject.getText()+ " Link<font></li>"); //Writing In To File.
+			  BW.write(" <li><font color='"+obj.getProperty("ErrorColor") +"'>Failed: "+titleObject.getText()+ " Link<font></li>"); //Writing In To File.
 
 		}
         }else{
         	logErrorMessage("Failed: Unable to communicate to the server. Plesae check network connectivity");
-			BW.write(" <li><font color='red'>Failed: Unable to communicate to the server. Plesae check network connectivity<font></li>"); //Writing In To File.
+			BW.write(" <li><font color='"+obj.getProperty("ErrorColor") +"'>Failed: Unable to communicate to the server. Plesae check network connectivity<font></li>"); //Writing In To File.
          //   Thread.currentThread().stop();
         }
 		
@@ -383,7 +406,7 @@ public class NewTest extends ReusableMethods {
 	 public static void screenShot(String fileNameValue) throws IOException{
 		    fileNameValue = fileNameValue.replace("/", "_");
 	        File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-		    FileUtils.copyFile(scrFile, new File("/var/lib/jenkins/jobs/NE_Selenium_Single_URL/workspace/src/Screenshots/"+fileNameValue+".jpg"));		 
+		    FileUtils.copyFile(scrFile, new File(obj.getProperty("ScreenshotPath")+fileNameValue+".jpg"));		 
 	 }
 	 
 	 public static void clickObject (WebElement objectToClick) throws IOException{
@@ -396,5 +419,9 @@ public class NewTest extends ReusableMethods {
 		 }
 	 }
 	 
-	 
+	 @DataProvider
+		public Object[][] getTestData() {
+	        AAaisxls = new Xls_Reader("/Users/senthil-mac/Desktop/Selinum Code/Work Space/Poc_NE_DataDriven/src/URLList.xlsx");
+			return TestUtil.getData(AAaisxls, "Sheet1");
+		}
 }
