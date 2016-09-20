@@ -100,7 +100,9 @@ public class NewTest extends ReusableMethods {
 		}
 		}catch(Exception ex)
 		{
-						logErrorMessage(ex.getLocalizedMessage());
+						logErrorMessage(ex.getStackTrace());
+												logErrorMessage(ex.getMessage());
+
 		}
 	}
 	 
