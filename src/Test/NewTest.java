@@ -76,6 +76,8 @@ public class NewTest extends ReusableMethods {
 
 		// To get the number of columns present in sheet
 		int totalNoOfCols = sh.getColumns();
+				driver= new FirefoxDriver();
+
 
 		for (int row = 1; row < totalNoOfRows; row++) {
 
@@ -83,7 +85,6 @@ public class NewTest extends ReusableMethods {
 		            logMessage("2");
 	
 		//Opens firefox driver
-		driver= new FirefoxDriver();
 		
 		//Navigating to the application URL
 		//driver.get(System.getenv("APPURL"));
