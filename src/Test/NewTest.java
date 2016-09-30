@@ -182,6 +182,9 @@ public class NewTest extends ReusableMethods {
 		}
 		catch(Exception e)
 		{
+			
+			logMessage(e.getMessage());
+			logMessage(e.getStackTrace().toString());
 			logErrorMessage("No subfilters available.");
 		}
 		}
