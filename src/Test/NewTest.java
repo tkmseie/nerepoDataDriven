@@ -228,7 +228,7 @@ public class NewTest extends ReusableMethods {
 							//getLinkObj.click();
 							clickObject(getLinkObj);
 							clickCount++;
-							//Thread.sleep(4000);
+							Thread.sleep(4000);
 							Thread.sleep(1000);
 							currentGrid = driver.findElement(By.className("dsp-filter-wrap")).findElements(By.cssSelector(".atlas-grey-wrapper-small.atlas-display-filter")).get(currIndex);
 							WebElement spinnerObj = currentGrid.findElement(By.className("atlas-spinner"));
