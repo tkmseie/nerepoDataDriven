@@ -87,6 +87,8 @@ public class NewTest extends ReusableMethods {
 		//Navigating to the application URL
 		//driver.get(System.getenv("APPURL"));
 		logMessage("Navigating to: "+ URLValue);
+		 BW.write(" <li><font color='"+ obj.getProperty("BestLoadTimeColor")+"'>URL is: "+URLValue+ "Link<font></li>"); //Writing In To File.
+
 		driver.get(URLValue);
 		
 		//Verifying the logo is loaded or not. If the logo is notloaded the test will not be executed.
@@ -245,6 +247,7 @@ public class NewTest extends ReusableMethods {
 									break;
 								}
 						   }
+						}
 						else
 						{
 							logErrorMessage("Error while identifying link in the Filter panel. Test may not be executed for all combinations.");
