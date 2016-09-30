@@ -236,6 +236,7 @@ public class NewTest extends ReusableMethods {
 							int counterSpinner = 1;
 							while(spinnerObj.isDisplayed())
 							{
+								logMessage("displaed");
 								Thread.sleep(1000);
 								counterSpinner++;
 								currentGrid = driver.findElement(By.className("dsp-filter-wrap")).findElements(By.cssSelector(".atlas-grey-wrapper-small.atlas-display-filter")).get(currIndex);
