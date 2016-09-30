@@ -87,7 +87,7 @@ public class NewTest extends ReusableMethods {
 		//Navigating to the application URL
 		//driver.get(System.getenv("APPURL"));
 		logMessage("Navigating to: "+ URLValue);
-		 BW.write(" <li><font color='"+ obj.getProperty("BestLoadTimeColor")+"'>URL is: "+URLValue+ "Link<font></li>"); //Writing In To File.
+		 BW.write(" <li><font color='black'>URL is: "+URLValue+ "Link<font></li>"); //Writing In To File.
 
 		driver.get(URLValue);
 		
@@ -351,7 +351,7 @@ public class NewTest extends ReusableMethods {
 		//Identifies the title object
 		WebElement titleObject = driver.findElement(By.className("display-title"));
 		//After clicking the filter links the title should be changed. If not changed, it may be a network error. So this condition ensures the title is changed
-        if (!compareStrings(titleBeforeClick, titleObject.getText()))
+       // if (!compareStrings(titleBeforeClick, titleObject.getText()))
         {
         //After clicking the filter links, the script waits for 4 seconds. Now here the timer starts to count from 5th second.
 		for (timerCount=4; timerCount<15; timerCount++)
@@ -400,10 +400,6 @@ public class NewTest extends ReusableMethods {
 			  BW.write(" <li><font color='"+obj.getProperty("ErrorColor") +"'>Failed: "+titleObject.getText()+ " Link<font></li>"); //Writing In To File.
 
 		}
-        }else{
-        	logErrorMessage("Failed: Unable to communicate to the server. Plesae check network connectivity");
-			BW.write(" <li><font color='"+obj.getProperty("ErrorColor") +"'>Failed: Unable to communicate to the server. Plesae check network connectivity<font></li>"); //Writing In To File.
-         //   Thread.currentThread().stop();
         }
 		
 	}
