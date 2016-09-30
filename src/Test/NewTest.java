@@ -226,9 +226,25 @@ public class NewTest extends ReusableMethods {
 							//getLinkObj.click();
 							clickObject(getLinkObj);
 							clickCount++;
-							Thread.sleep(4000);
-							verifyImage();	
-						}
+							//Thread.sleep(4000);
+							//Thread.sleep(1000);
+							currentGrid = driver.findElement(By.className("dsp-filter-wrap")).findElements(By.cssSelector(".atlas-grey-wrapper-small.atlas-display-filter")).get(currIndex);
+							WebElement spinnerObj = currentGrid.findElement(By.className("atlas-spinner"));
+							//Thread.sleep(1000);
+							int counterSpinner = 1;
+							while(spinnerObj.isDisplayed())
+							{
+								Thread.sleep(1000);
+								counterSpinner++;
+								currentGrid = driver.findElement(By.className("dsp-filter-wrap")).findElements(By.cssSelector(".atlas-grey-wrapper-small.atlas-display-filter")).get(currIndex);
+								spinnerObj = currentGrid.findElement(By.className("atlas-spinner"));
+							    verifyImage();	
+								if (counterSpinner>15)
+								{
+									logErrorMessage("Image is not started to be loaded.");
+									break;
+								}
+						   }
 						else
 						{
 							logErrorMessage("Error while identifying link in the Filter panel. Test may not be executed for all combinations.");
