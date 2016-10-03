@@ -226,14 +226,17 @@ public class NewTest extends ReusableMethods {
 						WebElement getLinkObj = findObjectFromClassNameListByIndex(currentGrid, i, "atlas-display-exposed-filter", "Link in Filter Panel");
 						if (getLinkObj != null)
 						{
+							logMessage("displaed");
 							WebElement titleObject = findObject(driver, "classname", "display-title", "Filter Panel");
 							titleBeforeClick = titleObject.getText();
 							//getLinkObj.click();
 							clickObject(getLinkObj);
+							logMessage("displaed");
 							clickCount++;
 							Thread.sleep(4000);
 							Thread.sleep(1000);
 								try{
+									logMessage("displaed");
 							currentGrid = driver.findElement(By.className("dsp-filter-wrap")).findElements(By.cssSelector(".atlas-grey-wrapper-small.atlas-display-filter")).get(currIndex);
 							WebElement spinnerObj = currentGrid.findElement(By.className("atlas-spinner"));
 							//Thread.sleep(1000);
@@ -241,7 +244,7 @@ public class NewTest extends ReusableMethods {
 						
 							while(spinnerObj.isDisplayed())
 							{
-								logMessage("displaed");
+								
 								Thread.sleep(1000);
 								counterSpinner++;
 								currentGrid = driver.findElement(By.className("dsp-filter-wrap")).findElements(By.cssSelector(".atlas-grey-wrapper-small.atlas-display-filter")).get(currIndex);
