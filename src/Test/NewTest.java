@@ -45,6 +45,7 @@ public class NewTest extends ReusableMethods {
 	public static Integer clickCount =0;
 	public static Properties obj = new Properties(); 
 	public static FileInputStream objfile;
+	public static int counterSpinner;
 
 	
 	/**
@@ -234,7 +235,7 @@ public class NewTest extends ReusableMethods {
 							//Thread.sleep(4000);
 							Thread.sleep(1000);
 							
-							int counterSpinner = 1;
+							counterSpinner = 1;
 							WebElement spinnerObj;
 							try{
 							currentGrid = driver.findElement(By.className("dsp-filter-wrap")).findElements(By.cssSelector(".atlas-grey-wrapper-small.atlas-display-filter")).get(currIndex);
@@ -373,7 +374,7 @@ public class NewTest extends ReusableMethods {
        // if (!compareStrings(titleBeforeClick, titleObject.getText()))
         {
         //After clicking the filter links, the script waits for 4 seconds. Now here the timer starts to count from 5th second.
-		for (timerCount=4; timerCount<15; timerCount++)
+		for (timerCount=counterSpinner; timerCount<15; timerCount++)
 		{
 			List<WebElement> divElements = imageObject.findElements(By.tagName("div"));
             if (divElements.size() !=0)
