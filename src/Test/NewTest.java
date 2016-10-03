@@ -233,11 +233,12 @@ public class NewTest extends ReusableMethods {
 							clickCount++;
 							Thread.sleep(4000);
 							Thread.sleep(1000);
+								try{
 							currentGrid = driver.findElement(By.className("dsp-filter-wrap")).findElements(By.cssSelector(".atlas-grey-wrapper-small.atlas-display-filter")).get(currIndex);
 							WebElement spinnerObj = currentGrid.findElement(By.className("atlas-spinner"));
 							//Thread.sleep(1000);
 							int counterSpinner = 1;
-							try{
+						
 							while(spinnerObj.isDisplayed())
 							{
 								logMessage("displaed");
