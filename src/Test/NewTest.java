@@ -242,6 +242,7 @@ public class NewTest extends ReusableMethods {
 							//Thread.sleep(1000);
 							int counterSpinner = 1;
 																						logMessage("displaed5");
+							System.out.println(spinnerObj.isDisplayed());															
 
 							while(spinnerObj.isDisplayed())
 							{
