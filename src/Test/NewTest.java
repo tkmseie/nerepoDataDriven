@@ -237,7 +237,7 @@ public class NewTest extends ReusableMethods {
 							WebElement spinnerObj = currentGrid.findElement(By.className("atlas-spinner"));
 							//Thread.sleep(1000);
 							int counterSpinner = 1;
-							try(
+							try{
 							while(spinnerObj.isDisplayed())
 							{
 								logMessage("displaed");
