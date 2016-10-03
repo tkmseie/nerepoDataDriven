@@ -226,22 +226,22 @@ public class NewTest extends ReusableMethods {
 						WebElement getLinkObj = findObjectFromClassNameListByIndex(currentGrid, i, "atlas-display-exposed-filter", "Link in Filter Panel");
 						if (getLinkObj != null)
 						{
-							logMessage("displaed1");
+							//logMessage("displaed1");
 							WebElement titleObject = findObject(driver, "classname", "display-title", "Filter Panel");
 							titleBeforeClick = titleObject.getText();
 							//getLinkObj.click();
 							clickObject(getLinkObj);
 							logMessage("displaed2");
 							clickCount++;
-							Thread.sleep(4000);
-							Thread.sleep(1000);
-								try{
-									logMessage("displaed3");
+							//Thread.sleep(4000);
+							//Thread.sleep(1000);
+							
+									//logMessage("displaed3");
 							currentGrid = driver.findElement(By.className("dsp-filter-wrap")).findElements(By.cssSelector(".atlas-grey-wrapper-small.atlas-display-filter")).get(currIndex);
 							WebElement spinnerObj = currentGrid.findElement(By.className("atlas-spinner"));
 							//Thread.sleep(1000);
 							int counterSpinner = 1;
-																						logMessage("displaed5");
+																						//logMessage("displaed5");
 							System.out.println(spinnerObj.isDisplayed());															
 
 							while(spinnerObj.isDisplayed())
@@ -252,19 +252,16 @@ public class NewTest extends ReusableMethods {
 								counterSpinner++;
 								currentGrid = driver.findElement(By.className("dsp-filter-wrap")).findElements(By.cssSelector(".atlas-grey-wrapper-small.atlas-display-filter")).get(currIndex);
 								spinnerObj = currentGrid.findElement(By.className("atlas-spinner"));
-							    verifyImage();	
 								if (counterSpinner>15)
 								{
 									logErrorMessage("Image is not started to be loaded.");
 									break;
 								}
 						   }
-						}catch(Exception e)
-						{
-							logMessage(e.getMessage());
-			logMessage(e.getLocalizedMessage());
-			logMessage(e.getStackTrace().toString());
-						}
+						   							logMessage("Waiting seconds:"+counterSpinner);
+						verifyImage();	
+
+						
 						}
 						else
 						{
@@ -364,6 +361,7 @@ public class NewTest extends ReusableMethods {
 	public static void verifyImage() throws InterruptedException, IOException
 	{
 		int timerCount ;
+		 logErrorMessage("No data mes");
 		//Identifies the Image object
 		WebElement imageObject = driver.findElement(By.tagName("figure"));
 		//Identifies the title object
