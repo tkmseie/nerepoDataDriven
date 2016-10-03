@@ -240,8 +240,7 @@ public class NewTest extends ReusableMethods {
 							try{
 							currentGrid = driver.findElement(By.className("dsp-filter-wrap")).findElements(By.cssSelector(".atlas-grey-wrapper-small.atlas-display-filter")).get(currIndex);
 							WebElement spinnerObj = currentGrid.findElement(By.className("atlas-spinner"));
-							}
-							catch (Exception e)
+							}catch (Exception e)
 							{
                                 Thread.sleep(1000);
 								counterSpinner++;
