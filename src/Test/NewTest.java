@@ -234,13 +234,21 @@ public class NewTest extends ReusableMethods {
 							logMessage("displaed2");
 							clickCount++;
 							//Thread.sleep(4000);
-							//Thread.sleep(1000);
+							Thread.sleep(1000);
 							
-									//logMessage("displaed3");
+							int counterSpinner = 1;
+							try{
 							currentGrid = driver.findElement(By.className("dsp-filter-wrap")).findElements(By.cssSelector(".atlas-grey-wrapper-small.atlas-display-filter")).get(currIndex);
 							WebElement spinnerObj = currentGrid.findElement(By.className("atlas-spinner"));
+							}
+							catch (Exception e)
+							{
+                                Thread.sleep(1000);
+								counterSpinner++;
+								currentGrid = driver.findElement(By.className("dsp-filter-wrap")).findElements(By.cssSelector(".atlas-grey-wrapper-small.atlas-display-filter")).get(currIndex);
+							    WebElement spinnerObj = currentGrid.findElement(By.className("atlas-spinner"));
+							}
 							//Thread.sleep(1000);
-							int counterSpinner = 1;
 																						//logMessage("displaed5");
 							System.out.println(spinnerObj.isDisplayed());															
 
