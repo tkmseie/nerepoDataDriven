@@ -186,7 +186,7 @@ public class NewTest extends ReusableMethods {
 			
 			System.out.println(e.getMessage());
 			System.out.println(e.getStackTrace().toString());
-			logErrorMessage("No subfilters available.");
+			logErrorMessage("Error while identifying object. Filters for current breakdown will not be executed. Moving to next breakdown set.");
 		}
 		}
 		else
@@ -233,9 +233,9 @@ public class NewTest extends ReusableMethods {
 							clickObject(getLinkObj);
 							clickCount++;
 							//Thread.sleep(4000);
-							//Thread.sleep(1000);
+							Thread.sleep(2000);
 							
-							counterSpinner = 1;
+							counterSpinner = 2;
 							WebElement spinnerObj;
 							try{
 							currentGrid = driver.findElement(By.className("dsp-filter-wrap")).findElements(By.cssSelector(".atlas-grey-wrapper-small.atlas-display-filter")).get(currIndex);
