@@ -217,7 +217,6 @@ public class NewTest extends ReusableMethods {
 		{
 			List<WebElement> allLastlinks = currentGrid.findElements(By.className("atlas-display-exposed-filter"));
 			       Integer totalLinkCount = allLastlinks.size();
-				    logMessage("1");
 
 					for(i=0; i<totalLinkCount; i++)  
 					{
@@ -231,7 +230,6 @@ public class NewTest extends ReusableMethods {
 							titleBeforeClick = titleObject.getText();
 							//getLinkObj.click();
 							clickObject(getLinkObj);
-							logMessage("displaed2");
 							clickCount++;
 							//Thread.sleep(4000);
 							Thread.sleep(1000);
@@ -250,12 +248,10 @@ public class NewTest extends ReusableMethods {
 							}
 							//Thread.sleep(1000);
 																						//logMessage("displaed5");
-							System.out.println(spinnerObj.isDisplayed());															
 
 							while(spinnerObj.isDisplayed())
 							{
 								
-																	logMessage("displaed4");
 								Thread.sleep(1000);
 								counterSpinner++;
 								currentGrid = driver.findElement(By.className("dsp-filter-wrap")).findElements(By.cssSelector(".atlas-grey-wrapper-small.atlas-display-filter")).get(currIndex);
@@ -369,7 +365,6 @@ public class NewTest extends ReusableMethods {
 	public static void verifyImage() throws InterruptedException, IOException
 	{
 		int timerCount ;
-		 logErrorMessage("No data mes");
 		//Identifies the Image object
 		WebElement imageObject = driver.findElement(By.tagName("figure"));
 		//Identifies the title object
