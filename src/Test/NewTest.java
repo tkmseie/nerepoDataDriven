@@ -233,7 +233,7 @@ public class NewTest extends ReusableMethods {
 							clickObject(getLinkObj);
 							clickCount++;
 							//Thread.sleep(4000);
-							Thread.sleep(1000);
+							//Thread.sleep(1000);
 							
 							counterSpinner = 1;
 							WebElement spinnerObj;
