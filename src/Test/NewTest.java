@@ -242,14 +242,16 @@ public class NewTest extends ReusableMethods {
 							spinnerObj = currentGrid.findElement(By.className("atlas-spinner"));
 							}catch (Exception e)
 							{
-                                Thread.sleep(1000);
+                                Thread.sleep(2000);
 								counterSpinner++;
+																counterSpinner++;
+
 								currentGrid = driver.findElement(By.className("dsp-filter-wrap")).findElements(By.cssSelector(".atlas-grey-wrapper-small.atlas-display-filter")).get(currIndex);
 							    spinnerObj = currentGrid.findElement(By.className("atlas-spinner"));
 							}
 							//Thread.sleep(1000);
 																						//logMessage("displaed5");
-
+                          try{
 							while(spinnerObj.isDisplayed())
 							{
 								
@@ -263,6 +265,11 @@ public class NewTest extends ReusableMethods {
 									break;
 								}
 						   }
+						  }catch(Exception e)
+						  {
+							  Thread.sleep(1000);
+								counterSpinner++;
+						  }
 						   							logMessage("Waiting seconds:"+counterSpinner);
 						verifyImage();	
 
