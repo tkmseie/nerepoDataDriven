@@ -402,7 +402,7 @@ public class NewTest extends ReusableMethods {
              }  
 		}
 		//Takes screenshot for all filter combinations
-		screenShot(titleObject.getText());
+		//screenShot(titleObject.getText());
 		if(timerCount < Integer.parseInt(obj.getProperty("BestMaximumLoadTim")) )
 		{
 			System.out.println("Image is Loaded for "+titleObject.getText()+ " Link.");
