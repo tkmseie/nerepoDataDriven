@@ -28,6 +28,8 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.Test;
 
 import Util.TestUtil;
@@ -76,7 +78,7 @@ public class NewTest extends ReusableMethods {
 
 		// To get the number of columns present in sheet
 		int totalNoOfCols = sh.getColumns();
-				driver= new FirefoxDriver();
+				//driver= new FirefoxDriver();
 
 
 		for (int row = 1; row < totalNoOfRows; row++) {
@@ -90,7 +92,9 @@ public class NewTest extends ReusableMethods {
 		logMessage("Navigating to: "+ URLValue);
 		 BW.write(" <li><font color='black'>URL is: "+URLValue+ "Link<font></li>"); //Writing In To File.
 
-		driver.get(URLValue);
+		//driver.get(URLValue);
+		naviGateURL(URLValue, obj.getProperty("QAUname"), obj.getProperty("QAPwd"));
+
 		
 		//Verifying the logo is loaded or not. If the logo is notloaded the test will not be executed.
 		WebElement logoImageObj = findObject(driver, "xpath", "//*[@id=\"page\"]/header/div/hgroup/h2/ul/li[1]/a/img", "Policy Link Logo");
@@ -109,6 +113,38 @@ public class NewTest extends ReusableMethods {
 
 		}
 	}
+
+		public static void naviGateURL(String urlValue, String Uname, String pwd) throws IOException {
+		 
+		 FirefoxProfile profile = new FirefoxProfile();
+	        File modifyHeaders = new File(obj.getProperty("xpiFilePath"));
+	        profile.setEnableNativeEvents(false);
+	        profile.addExtension(modifyHeaders);
+
+	        profile.setPreference("modifyheaders.headers.count", 1);
+	        profile.setPreference("modifyheaders.headers.action0", "Add");
+	        profile.setPreference("modifyheaders.headers.name0", "Authorization");
+	        profile.setPreference("modifyheaders.headers.value0", "Basic cGw6aDN1c29oM3NE");
+	        profile.setPreference("modifyheaders.headers.enabled0", true);
+	        profile.setPreference("modifyheaders.config.active", true);
+	        profile.setPreference("modifyheaders.config.alwaysOn", true);
+
+	        DesiredCapabilities capabilities = new DesiredCapabilities();
+	        capabilities.setBrowserName("firefox");
+	        capabilities.setPlatform(org.openqa.selenium.Platform.ANY);
+	        capabilities.setCapability(FirefoxDriver.PROFILE, profile);
+
+	        driver = new FirefoxDriver(capabilities);
+	        System.out.println("http://"+Uname+":"+pwd+"@"+urlValue);
+	         if (urlValue.indexOf("test.") ==-1)
+	        {
+		        driver.get("http://"+urlValue);
+
+	        }else{
+	        System.out.println("http://"+Uname+":"+pwd+"@"+urlValue);
+	        driver.get("http://"+Uname+":"+pwd+"@"+urlValue);
+	        }
+	 }
 	 
 	 /**
 		 * The following method is used to navigate to each an every links in "Break down" panel
