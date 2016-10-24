@@ -84,7 +84,8 @@ public class NewTest extends ReusableMethods {
 		for (int row = 1; row < totalNoOfRows; row++) {
 
 		String URLValue= sh.getCell(0, row).getContents();
-	
+	    URLValue = URLValue.replace("http://", "");
+		System.out.println(URLValue);
 		//Opens firefox driver
 		
 		//Navigating to the application URL
