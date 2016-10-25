@@ -462,6 +462,7 @@ public class NewTest extends ReusableMethods {
 		}
 		else
 		{
+			System.out.println(timerCount);
 			logErrorMessage("Failed: Image is Loaded Not  for "+titleObject.getText()+ " Link.");
 			  BW.write(" <li><font color='"+obj.getProperty("ErrorColor") +"'>Failed: "+titleObject.getText()+ " Link<font></li>"); //Writing In To File.
 
