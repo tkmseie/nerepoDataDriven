@@ -106,22 +106,32 @@ public class NewTest extends ReusableMethods {
         else{
         	logErrorMessage("Error while loading application. Cannot continue the test");
         }	
+				driver.quit();
+
 		}
 		}catch(Exception ex)
 		{
 					//	logErrorMessage(ex.getStackTrace());
 						logErrorMessage(ex.getMessage());
+								driver.quit();
+
 
 		}
 	}
 
 		public static void naviGateURL(String urlValue, String Uname, String pwd) throws IOException {
 		 
+		
+		if (urlValue.indexOf("test.") ==-1)
+	        {
+		    	driver = new FirefoxDriver();	
+				driver.get("http://"+urlValue);
+
+	        }else{
 		 FirefoxProfile profile = new FirefoxProfile();
 	        File modifyHeaders = new File(obj.getProperty("xpiFilePath"));
 	        profile.setEnableNativeEvents(false);
 	        profile.addExtension(modifyHeaders);
-
 	        profile.setPreference("modifyheaders.headers.count", 1);
 	        profile.setPreference("modifyheaders.headers.action0", "Add");
 	        profile.setPreference("modifyheaders.headers.name0", "Authorization");
@@ -129,19 +139,11 @@ public class NewTest extends ReusableMethods {
 	        profile.setPreference("modifyheaders.headers.enabled0", true);
 	        profile.setPreference("modifyheaders.config.active", true);
 	        profile.setPreference("modifyheaders.config.alwaysOn", true);
-
 	        DesiredCapabilities capabilities = new DesiredCapabilities();
 	        capabilities.setBrowserName("firefox");
 	        capabilities.setPlatform(org.openqa.selenium.Platform.ANY);
 	        capabilities.setCapability(FirefoxDriver.PROFILE, profile);
-
-	        driver = new FirefoxDriver(capabilities);
-	        System.out.println("http://"+Uname+":"+pwd+"@"+urlValue);
-	         if (urlValue.indexOf("test.") ==-1)
-	        {
-		        driver.get("http://"+urlValue);
-
-	        }else{
+	        driver = new FirefoxDriver(capabilities);	
 	        System.out.println("http://"+Uname+":"+pwd+"@"+urlValue);
 	        driver.get("http://"+Uname+":"+pwd+"@"+urlValue);
 	        }
