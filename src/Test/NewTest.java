@@ -146,6 +146,8 @@ public class NewTest extends ReusableMethods {
 	        driver = new FirefoxDriver(capabilities);	
 	        System.out.println("http://"+Uname+":"+pwd+"@"+urlValue);
 	        driver.get("http://"+Uname+":"+pwd+"@"+urlValue);
+			            driver.get("http://"+urlValue);
+
 	        }
 	 }
 	 
