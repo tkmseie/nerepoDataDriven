@@ -214,7 +214,7 @@ public class NewTest extends ReusableMethods {
 		try{
 		allGrids = parGrid.findElements(By.cssSelector(".atlas-grey-wrapper-small.atlas-display-filter"));
 		 totalNoOfGrids = allGrids.size();
-		 
+		     
 		        //Iterates through each filter panel and clicks all the combination of filters
 				for(WebElement eachGrid : allGrids)  
 				{
@@ -279,23 +279,27 @@ public class NewTest extends ReusableMethods {
 							counterSpinner = 2;
 							WebElement spinnerObj;
 							try{
+								logMessage("displaed5");
 							currentGrid = driver.findElement(By.className("dsp-filter-wrap")).findElements(By.cssSelector(".atlas-grey-wrapper-small.atlas-display-filter")).get(currIndex);
 							spinnerObj = currentGrid.findElement(By.className("atlas-spinner"));
+							logMessage("displaed6");
 							}catch (Exception e)
 							{
-                                Thread.sleep(2000);
+                                logMessage("displaed7");
+								Thread.sleep(2000);
 								counterSpinner++;
 																counterSpinner++;
 
 								currentGrid = driver.findElement(By.className("dsp-filter-wrap")).findElements(By.cssSelector(".atlas-grey-wrapper-small.atlas-display-filter")).get(currIndex);
 							    spinnerObj = currentGrid.findElement(By.className("atlas-spinner"));
+								logMessage("displaed8");
 							}
 							//Thread.sleep(1000);
 																						//logMessage("displaed5");
                           try{
 							while(spinnerObj.isDisplayed())
 							{
-								
+								logMessage("displaed9");
 								Thread.sleep(1000);
 								counterSpinner++;
 								currentGrid = driver.findElement(By.className("dsp-filter-wrap")).findElements(By.cssSelector(".atlas-grey-wrapper-small.atlas-display-filter")).get(currIndex);
