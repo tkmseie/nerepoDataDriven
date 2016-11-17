@@ -179,6 +179,7 @@ public class NewTest extends ReusableMethods {
 		                {
 		                   // element.click();
 		            	    clickObject(element);
+							logMessage("testmessage");
 				      		Thread.sleep(8000);
 				      		clickCount++;
 
