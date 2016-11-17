@@ -170,6 +170,8 @@ public class NewTest extends ReusableMethods {
 			verifyImage();
 			clickCombination( );
 		}
+				System.out.println(allSumInsuredFields.size());
+
 		//This loop iterates through each link in the breakdown panel and clicks it
 		for(WebElement element : allSumInsuredFields)     
 		{
