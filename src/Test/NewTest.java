@@ -251,6 +251,7 @@ public class NewTest extends ReusableMethods {
 		//Identifies the filter panel based on the index
 		WebElement currentGrid = driver.findElement(By.className("dsp-filter-wrap")).findElements(By.cssSelector(".atlas-grey-wrapper-small.atlas-display-filter")).get(currIndex);
 		WebElement tempFilterPanel = findObject(driver, "classname", "dsp-filter-wrap", "Filter Panel");
+		logMessage("displaed5");
 		if(tempFilterPanel != null)
 		{
 			currentGrid = tempFilterPanel.findElements(By.cssSelector(".atlas-grey-wrapper-small.atlas-display-filter")).get(currIndex);
@@ -352,7 +353,9 @@ public class NewTest extends ReusableMethods {
 					//getLinkObj.click();
 					clickObject(getLinkObj);
 					clickCount++;
+					logMessage("displaed5");
 					Thread.sleep(8000);
+					logMessage("displaed5");
 					findCombination(currIndex+1);				
 				}
 				else
