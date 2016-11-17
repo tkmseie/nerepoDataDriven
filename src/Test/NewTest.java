@@ -106,6 +106,7 @@ public class NewTest extends ReusableMethods {
         else{
         	logErrorMessage("Error while loading application. Cannot continue the test");
         }	
+				logMessage("test message two");
 				driver.quit();
 
 		}
