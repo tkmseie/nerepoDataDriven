@@ -107,7 +107,7 @@ public class NewTest extends ReusableMethods {
         else{
         	logErrorMessage("Error while loading application. Cannot continue the test");
         }	
-				logMessage("test message two");
+			
 				driver.quit();
 
 		}
@@ -183,7 +183,6 @@ public class NewTest extends ReusableMethods {
 		                {
 		                   // element.click();
 		            	    clickObject(element);
-							logMessage("testmessage");
 				      		Thread.sleep(8000);
 				      		clickCount++;
 
@@ -256,7 +255,6 @@ public class NewTest extends ReusableMethods {
 		//Identifies the filter panel based on the index
 		WebElement currentGrid = driver.findElement(By.className("dsp-filter-wrap")).findElements(By.cssSelector(".atlas-grey-wrapper-small.atlas-display-filter")).get(currIndex);
 		WebElement tempFilterPanel = findObject(driver, "classname", "dsp-filter-wrap", "Filter Panel");
-		logMessage("displaed5");
 		if(tempFilterPanel != null)
 		{
 			currentGrid = tempFilterPanel.findElements(By.cssSelector(".atlas-grey-wrapper-small.atlas-display-filter")).get(currIndex);
@@ -273,7 +271,6 @@ public class NewTest extends ReusableMethods {
 						WebElement getLinkObj = findObjectFromClassNameListByIndex(currentGrid, i, "atlas-display-exposed-filter", "Link in Filter Panel");
 						if (getLinkObj != null)
 						{
-							//logMessage("displaed1");
 							WebElement titleObject = findObject(driver, "classname", "display-title", "Filter Panel");
 							titleBeforeClick = titleObject.getText();
 							//getLinkObj.click();
@@ -285,27 +282,22 @@ public class NewTest extends ReusableMethods {
 							counterSpinner = 2;
 							WebElement spinnerObj;
 							try{
-								logMessage("displaed5");
 							currentGrid = driver.findElement(By.className("dsp-filter-wrap")).findElements(By.cssSelector(".atlas-grey-wrapper-small.atlas-display-filter")).get(currIndex);
 							spinnerObj = currentGrid.findElement(By.className("atlas-spinner"));
-							logMessage("displaed6");
 							}catch (Exception e)
 							{
-                                logMessage("displaed7");
 								Thread.sleep(2000);
 								counterSpinner++;
 																counterSpinner++;
 
 								currentGrid = driver.findElement(By.className("dsp-filter-wrap")).findElements(By.cssSelector(".atlas-grey-wrapper-small.atlas-display-filter")).get(currIndex);
 							    spinnerObj = currentGrid.findElement(By.className("atlas-spinner"));
-								logMessage("displaed8");
 							}
 							//Thread.sleep(1000);
 																						//logMessage("displaed5");
                           try{
 							while(spinnerObj.isDisplayed())
 							{
-								logMessage("displaed9");
 								Thread.sleep(1000);
 								counterSpinner++;
 								currentGrid = driver.findElement(By.className("dsp-filter-wrap")).findElements(By.cssSelector(".atlas-grey-wrapper-small.atlas-display-filter")).get(currIndex);
@@ -336,10 +328,10 @@ public class NewTest extends ReusableMethods {
 		//If it is not last filter panel, then it clicks each and every link & again navigates to next panel by calling this function recursively
 		else
 		{
-		    logMessage(currIndex.toString());
+		    //logMessage(currIndex.toString());
 			currentGrid = driver.findElement(By.className("dsp-filter-wrap")).findElements(By.cssSelector(".atlas-grey-wrapper-small.atlas-display-filter")).get(currIndex);
 			//List<WebElement> allLinks = currentGrid.findElements(By.className("atlas-display-exposed-filter"));
-            logMessage(currentGrid.getText());
+           // logMessage(currentGrid.getText());
 			//List<WebElement> allLinks = currentGrid.findElements(By.xpath("//a[contains(@class, '-filter')]"));
             List<WebElement> allLinks = currentGrid.findElements(By.tagName("a"));
 
@@ -358,9 +350,7 @@ public class NewTest extends ReusableMethods {
 					//getLinkObj.click();
 					clickObject(getLinkObj);
 					clickCount++;
-					logMessage("displaed5");
 					Thread.sleep(8000);
-					logMessage("displaed5");
 					findCombination(currIndex+1);				
 				}
 				else
@@ -514,12 +504,12 @@ public class NewTest extends ReusableMethods {
 	 
 	 public static void clickObject (WebElement objectToClick) throws IOException{
 		 try{
-			 logMessage(objectToClick.getText() +" is clicked.");
 			 if(objectToClick.getText().equals("Map"))
 			 {
-               logMessage("Map is not clicked.");
+               logMessage("*****Map Link is displayed but not clicked.*******");
 			 }
 			 else{
+			logMessage(objectToClick.getText() +" is clicked.");
 			 objectToClick.click();
 			 }
 		 }
