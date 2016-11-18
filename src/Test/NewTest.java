@@ -95,6 +95,7 @@ public class NewTest extends ReusableMethods {
 
 		//driver.get(URLValue);
 		naviGateURL(URLValue, obj.getProperty("QAUname"), obj.getProperty("QAPwd"));
+        Thread.sleep(8000);
 
 		
 		//Verifying the logo is loaded or not. If the logo is notloaded the test will not be executed.
