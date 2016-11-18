@@ -514,7 +514,13 @@ public class NewTest extends ReusableMethods {
 	 public static void clickObject (WebElement objectToClick) throws IOException{
 		 try{
 			 logMessage(objectToClick.getText() +" is clickked.");
+			 if(objectToClick.getText()==Map)
+			 {
+
+			 }
+			 else{
 			 objectToClick.click();
+			 }
 		 }
 		 catch(Exception ex){
 			 logErrorMessage("Error while clicking the Link");
