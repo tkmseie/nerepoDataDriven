@@ -517,7 +517,7 @@ public class NewTest extends ReusableMethods {
 			 logMessage(objectToClick.getText() +" is clickked.");
 			 if(objectToClick.getText()=="Map")
 			 {
-
+               logMessage("Map is not clicked.");
 			 }
 			 else{
 			 objectToClick.click();
